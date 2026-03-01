@@ -50,12 +50,23 @@ public class OpenAIWebSocketService : IHostedService, IDisposable
             ReconnectCheckInterval);
     }
 
-    public Task StopAsync(CancellationToken cancellationToken)
+    public async Task StopAsync(CancellationToken cancellationToken)
     {
         _reconnectTimer?.Change(Timeout.Infinite, Timeout.Infinite);
-        MarkConnectionDead();
+
+        if (_webSocket is { State: WebSocketState.Open })
+        {
+            try
+            {
+                await _webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Shutting down", cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Error closing WebSocket during shutdown");
+            }
+        }
+
         _logger.LogInformation("OpenAI WebSocket service stopped");
-        return Task.CompletedTask;
     }
 
     public async Task<string> GetChessResponseAsync(
