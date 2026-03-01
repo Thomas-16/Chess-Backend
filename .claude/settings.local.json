@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "WebFetch(domain:developers.openai.com)",
+      "Bash(dotnet build:*)"
     ]
   }
 }
