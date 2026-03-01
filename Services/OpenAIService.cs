@@ -51,10 +51,13 @@ public class OpenAIService
             // Add current user message with context
             messages.Add(new UserChatMessage(formattedMessage));
 
+#pragma warning disable OPENAI001
             var options = new ChatCompletionOptions
             {
-                MaxOutputTokenCount = 45
+                MaxOutputTokenCount = 512,
+                ReasoningEffortLevel = ChatReasoningEffortLevel.Low
             };
+#pragma warning restore OPENAI001
 
             ClientResult<ChatCompletion>? completion = await _chatClient.CompleteChatAsync(messages, options);
             string response = completion.Value.Content[0].Text ?? "I'm having trouble thinking right now. Let's focus on the game!";
