@@ -33,8 +33,7 @@ builder.Services.AddDbContext<ChessDbContext>(options =>
     options.UseNpgsql(connectionString));
 
 // Register services
-builder.Services.AddSingleton<OpenAIWebSocketService>();
-builder.Services.AddHostedService(sp => sp.GetRequiredService<OpenAIWebSocketService>());
+builder.Services.AddSingleton<OpenAIService>();
 builder.Services.AddScoped<GroqService>();
 builder.Services.AddHttpClient<GroqService>();
 builder.Services.AddScoped<VoiceService>();
