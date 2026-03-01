@@ -6,6 +6,9 @@
       "WebFetch(domain:platform.openai.com)",
       "WebFetch(domain:cookbook.openai.com)",
       "WebFetch(domain:developers.openai.com)"
+    ],
+    "additionalDirectories": [
+      "E:\\Coding\\Chess-React"
     ]
   }
 }
