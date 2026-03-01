@@ -10,12 +10,12 @@ public class ChessHub : Hub
 {
     private readonly ChessDbContext _context;
     private readonly GroqService _groqService;
-    private readonly OpenAIService _openAiService;
+    private readonly OpenAIWebSocketService _openAiService;
     private readonly VoiceService _voiceService;
     private readonly ILogger<ChessHub> _logger;
     private readonly bool useGroq;
 
-    public ChessHub(ChessDbContext context, GroqService groqService, OpenAIService openAiService, VoiceService voiceService, ILogger<ChessHub> logger)
+    public ChessHub(ChessDbContext context, GroqService groqService, OpenAIWebSocketService openAiService, VoiceService voiceService, ILogger<ChessHub> logger)
     {
         _context = context;
         _groqService = groqService;

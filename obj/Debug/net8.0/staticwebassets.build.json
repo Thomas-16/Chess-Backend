@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "uTWkZ6HY+0Dn7cBslHhMu9AYKh029uw42WJGNdsJPgU=",
-  "Source": "Chess-Backend",
-  "BasePath": "_content/Chess-Backend",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"z0ROCBr/1oF2kqnER/1NMYhaJstbsgkt8hB0fdJ/WOI=","Source":"Chess-Backend","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
