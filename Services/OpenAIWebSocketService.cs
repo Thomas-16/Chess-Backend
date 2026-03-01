@@ -189,7 +189,8 @@ public class OpenAIWebSocketService : IHostedService, IDisposable
                     return "I'm having trouble thinking right now. Let's focus on the game!";
 
                 case "error":
-                    _logger.LogError("OpenAI WebSocket error event: {RawJson}", json);
+                    string errDetail = root.TryGetProperty("message", out var m) ? m.GetString() ?? "unknown" : "unknown";
+                    _logger.LogError("OpenAI WebSocket error event: {Error}", errDetail);
                     return "I'm having trouble thinking right now. Let's focus on the game!";
             }
         }
@@ -236,9 +237,12 @@ public class OpenAIWebSocketService : IHostedService, IDisposable
         var request = new
         {
             type = "response.create",
-            model = "gpt-5-nano",
-            max_output_tokens = 45,
-            input
+            response = new
+            {
+                model = "gpt-4o-mini",
+                max_output_tokens = 45,
+                input
+            }
         };
 
         return JsonSerializer.Serialize(request);
@@ -248,6 +252,7 @@ public class OpenAIWebSocketService : IHostedService, IDisposable
     {
         var ws = new ClientWebSocket();
         ws.Options.SetRequestHeader("Authorization", $"Bearer {_apiKey}");
+        ws.Options.SetRequestHeader("OpenAI-Beta", "realtime=v1");
 
         await ws.ConnectAsync(WebSocketUri, cancellationToken);
 
