@@ -17,7 +17,7 @@ public class OpenAIService
                         Environment.GetEnvironmentVariable("OPENAI_API_KEY") ??
                         throw new InvalidOperationException("OpenAI API key not found. Set OPENAI_API_KEY environment variable.");
 
-        _chatClient = new ChatClient("gpt-4o-mini", apiKey);
+        _chatClient = new ChatClient("gpt-5-nano", apiKey);
         _logger = logger;
     }
 
