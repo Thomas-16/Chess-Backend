@@ -5,7 +5,8 @@
       "WebFetch(domain:community.openai.com)",
       "WebFetch(domain:platform.openai.com)",
       "WebFetch(domain:cookbook.openai.com)",
-      "WebFetch(domain:developers.openai.com)"
+      "WebFetch(domain:developers.openai.com)",
+      "Bash(dotnet test:*)"
     ],
     "additionalDirectories": [
       "E:\\Coding\\Chess-React"
