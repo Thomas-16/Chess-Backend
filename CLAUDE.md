@@ -12,7 +12,13 @@ dotnet ef migrations add <Name>       # Create EF Core migration
 dotnet ef database update             # Apply pending migrations
 ```
 
-No test project is configured. Health endpoints: `GET /health`, `GET /health/ready`.
+```bash
+dotnet test Chess-Backend.Tests     # Run all tests
+```
+
+After any significant changes, run `dotnet test` and ensure all tests pass before committing.
+
+Health endpoints: `GET /health`, `GET /health/ready`.
 
 ## Architecture
 
