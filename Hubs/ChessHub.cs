@@ -102,10 +102,12 @@ public class ChessHub : Hub
             };
             _context.ChatMessages.Add(aiMessage);
 
-            await _context.SaveChangesAsync();
+            // Save to DB and generate TTS concurrently
+            var dbTask = _context.SaveChangesAsync();
+            var ttsTask = _voiceService.TextToSpeechAsync(aiResponse);
+            await Task.WhenAll(dbTask, ttsTask);
 
-            // Generate speech for AI response
-            byte[] audioBytes = await _voiceService.TextToSpeechAsync(aiResponse);
+            byte[] audioBytes = ttsTask.Result;
             string audioBase64 = Convert.ToBase64String(audioBytes);
 
             // Send response back to client

@@ -17,7 +17,7 @@ public class OpenAIService
                         Environment.GetEnvironmentVariable("OPENAI_API_KEY") ??
                         throw new InvalidOperationException("OpenAI API key not found. Set OPENAI_API_KEY environment variable.");
 
-        _chatClient = new ChatClient("gpt-5-nano", apiKey);
+        _chatClient = new ChatClient("gpt-4.1-nano", apiKey);
         _logger = logger;
     }
 
@@ -51,13 +51,10 @@ public class OpenAIService
             // Add current user message with context
             messages.Add(new UserChatMessage(formattedMessage));
 
-#pragma warning disable OPENAI001
             var options = new ChatCompletionOptions
             {
-                MaxOutputTokenCount = 2048,
-                ReasoningEffortLevel = ChatReasoningEffortLevel.Low
+                MaxOutputTokenCount = 300
             };
-#pragma warning restore OPENAI001
 
             ClientResult<ChatCompletion>? completion = await _chatClient.CompleteChatAsync(messages, options);
             string response = completion.Value.Content
