@@ -45,11 +45,14 @@ public class OpenAIService
                 }
             }
 
-            // Format user message with position context
-            string formattedMessage = FormatMessageWithContext(userMessage, context);
+            // Add position context as a separate system note (so LLM treats it as background, not primary content)
+            if (context != null)
+            {
+                messages.Add(new SystemChatMessage(FormatContextNote(context)));
+            }
 
-            // Add current user message with context
-            messages.Add(new UserChatMessage(formattedMessage));
+            // Add current user message as-is
+            messages.Add(new UserChatMessage(userMessage));
 
             var options = new ChatCompletionOptions
             {
@@ -74,13 +77,8 @@ public class OpenAIService
         }
     }
 
-    public static string FormatMessageWithContext(string userMessage, ChessPositionContext? context)
+    public static string FormatContextNote(ChessPositionContext context)
     {
-        if (context == null)
-        {
-            return userMessage;
-        }
-
         var contextParts = new List<string>();
 
         // Player color and move info
@@ -118,7 +116,16 @@ public class OpenAIService
             contextParts.Add($"Only {context.LegalMoveCount} legal moves");
         }
 
-        string contextString = "[Position from the perspective of YOU, the AI] " + string.Join(", ", contextParts);
-        return $"{contextString}\nUser message: {userMessage}";
+        return "[Board state for reference — only mention if relevant to what the user said] " + string.Join(", ", contextParts);
+    }
+
+    public static string FormatMessageWithContext(string userMessage, ChessPositionContext? context)
+    {
+        if (context == null)
+        {
+            return userMessage;
+        }
+
+        return $"{FormatContextNote(context)}\nUser message: {userMessage}";
     }
 }

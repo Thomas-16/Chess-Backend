@@ -39,11 +39,14 @@ public class GroqService
                 messages.Add(new { role, content = msg.Message });
             }
 
-            // Format user message with position context
-            string formattedMessage = OpenAIService.FormatMessageWithContext(userMessage, context);
+            // Add position context as a separate system note
+            if (context != null)
+            {
+                messages.Add(new { role = "system", content = OpenAIService.FormatContextNote(context) });
+            }
 
-            // Add current user message with context
-            messages.Add(new { role = "user", content = formattedMessage });
+            // Add current user message as-is
+            messages.Add(new { role = "user", content = userMessage });
 
             var requestBody = new
             {

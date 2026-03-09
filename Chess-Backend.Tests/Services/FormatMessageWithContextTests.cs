@@ -130,7 +130,7 @@ public class FormatMessageWithContextTests
     {
         var ctx = CreateContext();
         string result = OpenAIService.FormatMessageWithContext("test", ctx);
-        Assert.Contains("[Position from the perspective of YOU, the AI]", result);
+        Assert.Contains("[Board state for reference", result);
     }
 
     private static ChessPositionContext CreateContext(

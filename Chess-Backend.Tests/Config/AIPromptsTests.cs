@@ -13,8 +13,8 @@ public class AIPromptsTests
     [Fact]
     public void ChessOpponentSystemPrompt_ContainsWittyPersonality()
     {
-        Assert.Contains("witty", AIPrompts.ChessOpponentSystemPrompt);
-        Assert.Contains("trash-talking", AIPrompts.ChessOpponentSystemPrompt);
+        Assert.Contains("sharp-witted", AIPrompts.ChessOpponentSystemPrompt);
+        Assert.Contains("cocky", AIPrompts.ChessOpponentSystemPrompt);
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public class AIPromptsTests
     [Fact]
     public void ChessOpponentSystemPrompt_SpeaksAsPlayer()
     {
-        Assert.Contains("my pieces", AIPrompts.ChessOpponentSystemPrompt);
+        Assert.Contains("my bishop", AIPrompts.ChessOpponentSystemPrompt);
         Assert.Contains("your king", AIPrompts.ChessOpponentSystemPrompt);
     }
 }
