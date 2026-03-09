@@ -14,7 +14,7 @@ public class AIPromptsTests
     public void ChessOpponentSystemPrompt_ContainsWittyPersonality()
     {
         Assert.Contains("sharp-witted", AIPrompts.ChessOpponentSystemPrompt);
-        Assert.Contains("cocky", AIPrompts.ChessOpponentSystemPrompt);
+        Assert.Contains("confident", AIPrompts.ChessOpponentSystemPrompt);
     }
 
     [Fact]
