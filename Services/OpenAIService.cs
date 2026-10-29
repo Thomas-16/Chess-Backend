@@ -17,7 +17,7 @@ public class OpenAIService
                         Environment.GetEnvironmentVariable("OPENAI_API_KEY") ??
                         throw new InvalidOperationException("OpenAI API key not found. Set OPENAI_API_KEY environment variable.");
 
-        _chatClient = new ChatClient("gpt-4.1-nano", apiKey);
+        _chatClient = new ChatClient("gpt-6-luna", apiKey);
         _logger = logger;
     }
 
@@ -54,10 +54,15 @@ public class OpenAIService
             // Add current user message as-is
             messages.Add(new UserChatMessage(userMessage));
 
+            // gpt-6-luna is a reasoning model (default effort: medium); disable reasoning so it
+            // doesn't eat the token budget or add latency to short chat replies
+#pragma warning disable OPENAI001
             var options = new ChatCompletionOptions
             {
-                MaxOutputTokenCount = 300
+                MaxOutputTokenCount = 300,
+                ReasoningEffortLevel = new ChatReasoningEffortLevel("none")
             };
+#pragma warning restore OPENAI001
 
             ClientResult<ChatCompletion>? completion = await _chatClient.CompleteChatAsync(messages, options);
             string response = completion.Value.Content

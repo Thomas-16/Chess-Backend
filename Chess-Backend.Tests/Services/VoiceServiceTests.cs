@@ -87,7 +87,7 @@ public class VoiceServiceTests
 
         Assert.NotNull(handler.LastRequestContent);
         Assert.Contains("Check!", handler.LastRequestContent);
-        Assert.Contains("eleven_monolingual_v1", handler.LastRequestContent);
+        Assert.Contains("eleven_flash_v2_5", handler.LastRequestContent);
         Assert.Contains("voice_settings", handler.LastRequestContent);
     }
 

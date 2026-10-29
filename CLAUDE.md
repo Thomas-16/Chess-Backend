@@ -33,7 +33,7 @@ Single hub at `/chesshub`. All game and chat communication goes through here:
 
 ### LLM Provider System
 Two interchangeable AI services selected by `LLM_PROVIDER` env var:
-- `Services/OpenAIService.cs` — GPT-5-nano with reasoning (`ReasoningEffort.Low`)
+- `Services/OpenAIService.cs` — gpt-6-luna with reasoning disabled (effort `none`) for low latency
 - `Services/GroqService.cs` — Llama 4 Scout via HTTP (not SDK)
 
 Both implement the same `GetChessResponseAsync(message, conversationHistory, positionContext?)` signature. ChessHub resolves which to call at construction time.

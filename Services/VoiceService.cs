@@ -39,7 +39,7 @@ public class VoiceService
             var payload = new
             {
                 text = text,
-                model_id = "eleven_monolingual_v1",
+                model_id = "eleven_flash_v2_5",
                 voice_settings = new
                 {
                     stability = 0.5,
